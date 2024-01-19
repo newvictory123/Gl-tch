@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class AI : MonoBehaviour
 {
+    /*
     [Header("Vision and Hearing")]
     [SerializeField] private GameObject player;
     [SerializeField] private Transform player_pos;
@@ -25,7 +26,7 @@ public class AI : MonoBehaviour
     [SerializeField] private float ChaseDistance;
     [SerializeField] public bool Moving;
 
-
+    
     [Header("Stuff")]
     private CharacterController controller;
     [SerializeField] private PlayerMechanics playerMechanics;
@@ -35,7 +36,7 @@ public class AI : MonoBehaviour
     [SerializeField] private Image HealthBar;
     [SerializeField] private TextMeshProUGUI runes;
     [SerializeField] private float runesAmount;
-
+    
 
     private int indexOfTarget;
     private Vector3 targetPosition;
@@ -204,4 +205,5 @@ public class AI : MonoBehaviour
             HealthBar.fillAmount = currentHealth / 100f;
         }
     }
+    */
 }
