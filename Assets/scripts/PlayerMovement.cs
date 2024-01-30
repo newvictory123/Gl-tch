@@ -49,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
         GetInput();
         GroundCheck();
         SpeedControl();
-        Jumping();
         Sprinting();
         Crouching();
 
@@ -73,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        Jumping();
     }
 
     private void GetInput()
