@@ -989,8 +989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1533409909}
-  cameraXMoveSpeed: 100
-  cameraYMoveSpeed: 100
+  cameraXMoveSpeed: 400
+  cameraYMoveSpeed: 400
   mouseXInput: 0
   mouseYInput: 0
   xRotation: 0
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   runSpeed: 150
   moveSpeed: 0
   moveDirection: {x: 0, y: 0, z: 0}
-  jumpForce: 30
+  jumpForce: 60
   canJump: 0
   horizontalInput: 0
   verticalInput: 0
