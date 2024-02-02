@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public float verticalInput;
     public bool sprintInput;
     public bool jumpInput;
-    public bool crouchInput;
+    public bool slideInput;
+    public bool slideReset;
 
     [Header("Ground control")]
     public float groundDrag;
@@ -36,12 +37,19 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     public RaycastHit slopeHit;
 
+    [Header("Slide")]
+    public float maxSlideTime;
+    public float slideTime;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerHeight = transform.localScale.y * 2f;
+        playerHeight = transform.localScale.y;
         airDrag = groundDrag / 2f;
         slideDrag = groundDrag - airDrag/2f;
+        slideTime = maxSlideTime;
+        slideReset = true;
     }
 
     private void Update()
@@ -50,14 +58,14 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         SpeedControl();
         Sprinting();
-        Crouching();
+        Sliding();
 
-        if (isGrounded && crouchInput)
+        if (isGrounded && slideInput)
         {
             rb.drag = slideDrag;
             canJump = true;
         }
-        else if (isGrounded && !crouchInput)
+        else if (isGrounded && !slideInput)
         {
             rb.drag = groundDrag;
             canJump = true;
@@ -83,7 +91,17 @@ public class PlayerMovement : MonoBehaviour
         KeyCode shift = KeyCode.LeftShift;
         sprintInput = Input.GetKey(shift);
         KeyCode crouch = KeyCode.LeftControl;
-        crouchInput = Input.GetKey(crouch);
+        if (slideReset)
+        {
+            slideInput = Input.GetKey(crouch);
+        }
+        if (Input.GetKeyUp(crouch))
+        {
+            slideReset = true;
+            slideTime = maxSlideTime;
+        }
+        
+            
     }
 
     private void MovePlayer()
@@ -117,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool GroundCheck()
     {
-        return isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f, Ground);
+        return isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.1f, Ground);
     }
 
     private void Jumping()
@@ -147,20 +165,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Crouching()
+    private void Sliding()
     {
-        if (crouchInput && isGrounded) 
+        if (slideInput && isGrounded && slideTime > 0) 
         {
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight / 4, transform.localScale.z);
+            slideTime -= Time.deltaTime;
+            transform.localScale = new Vector3(transform.localScale.x, playerHeight / 2, transform.localScale.z);
             rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         }
-        else if (crouchInput && !isGrounded)
+        if (slideInput && !isGrounded && slideTime > 0)
         {
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight / 4, transform.localScale.z);
-        }
-        else
-        {
+            slideTime -= Time.deltaTime;
             transform.localScale = new Vector3(transform.localScale.x, playerHeight / 2, transform.localScale.z);
+        }
+        if (slideTime <= 0)
+        {
+            slideInput = false;
+            slideReset = false;
+            transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+        }
+        if (!slideInput)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
         }
     }
 
