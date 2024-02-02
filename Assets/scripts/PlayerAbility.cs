@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PLayerAbility : MonoBehaviour
+public class PlayerAbility : MonoBehaviour
 {
 
     public GameObject camera;
     public Vector3 direction;
+    public bool ability4Active = false;
 
     private void Update()
     {
@@ -37,6 +38,10 @@ public class PLayerAbility : MonoBehaviour
             {
                 hit.collider.enabled = false;
             }
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            ability4Active = true;
         }
     }
 }
