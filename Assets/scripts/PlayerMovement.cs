@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlideTime;
     public float slideTime;
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -100,8 +99,6 @@ public class PlayerMovement : MonoBehaviour
             slideReset = true;
             slideTime = maxSlideTime;
         }
-        
-            
     }
 
     private void MovePlayer()
