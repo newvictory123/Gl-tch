@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         Jumping();
+        GravityForce();
     }
 
     private void GetInput()
@@ -114,6 +115,15 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection * moveSpeed, ForceMode.Force);
         }
     }
+
+    private void GravityForce()
+    {
+        if (!isGrounded)
+        {
+            rb.AddForce(Vector3.down * jumpForce, ForceMode.Acceleration);
+        }
+    }
+
     private void SpeedControl()
     {
         Vector3 Vel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
