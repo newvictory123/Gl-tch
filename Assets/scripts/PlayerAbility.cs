@@ -5,16 +5,23 @@ using UnityEngine;
 public class PlayerAbility : MonoBehaviour
 {
 
+    public Color glitchColor = Color.white;
     public GameObject camera;
     public Vector3 direction;
     public bool ability4Active = false;
+
+    private new Renderer renderer;
+    void Start()
+    {
+        renderer = GetComponent<Renderer>();
+    }
 
     private void Update()
     {
         // button 1: shrink ray
         // button 2: growth ray
         // button 3: hitbox remover
-
+        
         direction = camera.transform.position;
         RaycastHit hit;
 
@@ -41,6 +48,7 @@ public class PlayerAbility : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Alpha4))
         {
+            renderer.material.SetColor("_Glitch_color", glitchColor);
             ability4Active = true;
         }
     }
