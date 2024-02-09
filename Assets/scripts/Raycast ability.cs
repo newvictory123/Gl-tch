@@ -25,7 +25,7 @@ public class Raycastability : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PA.ability4Active == true)
+        if (PA.activeAbility == 4)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition.z = Camera.main.nearClipPlane;
