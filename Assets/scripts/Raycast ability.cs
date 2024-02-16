@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Raycastability : MonoBehaviour
 {
-    public float pointRadius = 1;
     public float pointWidth = 1;
     public float pointHeight = 1;
     public float pointLength = 1;
@@ -25,12 +24,12 @@ public class Raycastability : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PA.activeAbility == 4)
+
+        if (PA.activeAbility == 2)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition.z = Camera.main.nearClipPlane;
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            //Ray ray = new Ray(worldPosition, Camera.main.transform.forward);
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             RaycastHit hit;
 
@@ -40,16 +39,14 @@ public class Raycastability : MonoBehaviour
             {
                 if (hit.transform.gameObject == gameObject)
                 {
-                    renderer.material.SetFloat("_radius", pointRadius);
-                    renderer.material.SetFloat("_Width", pointRadius);
-                    renderer.material.SetFloat("_Length", pointRadius);
-                    renderer.material.SetFloat("_Height", pointRadius);
+                    renderer.material.SetFloat("_Width", pointWidth);
+                    renderer.material.SetFloat("_Height", pointHeight);
+                    renderer.material.SetFloat("_Length", pointLength);
                     renderer.material.SetVector("_point", new Vector4(hit.point.x, hit.point.y, hit.point.z, 0f));
                     Debug.Log(hit.point);
                 }
                 else
                 {
-                    renderer.material.SetFloat("_radius", 0f);
                     renderer.material.SetFloat("_Width", 0f);
                     renderer.material.SetFloat("_Length", 0f);
                     renderer.material.SetFloat("_Height", 0f);
@@ -57,7 +54,6 @@ public class Raycastability : MonoBehaviour
             }
             else
             {
-                renderer.material.SetFloat("_radius", 0f);
                 renderer.material.SetFloat("_Width", 0f);
                 renderer.material.SetFloat("_Length", 0f);
                 renderer.material.SetFloat("_Height", 0f);

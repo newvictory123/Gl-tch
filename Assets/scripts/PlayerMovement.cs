@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground control")]
     public float groundDrag;
     public float playerHeight;
+    private float armposition;
     public LayerMask Ground;
     public bool isGrounded;
 
@@ -41,10 +43,14 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlideTime;
     public float slideTime;
 
+    public Camera camera;
+    public GameObject arm;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerHeight = transform.localScale.y;
+        armposition = arm.transform.position.y;
         airDrag = groundDrag / 2f;
         slideDrag = groundDrag - airDrag/2f;
         slideTime = maxSlideTime;
@@ -177,23 +183,27 @@ public class PlayerMovement : MonoBehaviour
         if (slideInput && isGrounded && slideTime > 0) 
         {
             slideTime -= Time.deltaTime;
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight / 2, transform.localScale.z);
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y - 0.5f, camera.transform.position.z);
+            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y - 0.5f, arm.transform.position.z);
             rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         }
         if (slideInput && !isGrounded && slideTime > 0)
         {
             slideTime -= Time.deltaTime;
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight / 2, transform.localScale.z);
+            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y - 0.5f, arm.transform.position.z);
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y - 0.5f, camera.transform.position.z);
         }
         if (slideTime <= 0)
         {
             slideInput = false;
             slideReset = false;
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+            arm.transform.position = new Vector3(arm.transform.position.x, armposition, arm.transform.position.z);
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
         }
         if (!slideInput)
         {
-            transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+            arm.transform.position = new Vector3(arm.transform.position.x, armposition, arm.transform.position.z);
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
         }
     }
 
