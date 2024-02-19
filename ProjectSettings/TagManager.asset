@@ -11,8 +11,13 @@ TagManager:
   - walkable
   - Water
   - UI
+<<<<<<< Updated upstream
   - Editable
   - 
+=======
+  - Enemy
+  - Ignore
+>>>>>>> Stashed changes
   - 
   - 
   - 
