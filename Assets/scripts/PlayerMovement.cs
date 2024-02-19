@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump;
     private float airDrag;
     private float slideDrag;
+    public float gravity;
 
     [Header("Inputs")]
     public float horizontalInput;
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground control")]
     public float groundDrag;
     public float playerHeight;
-    private float armposition;
+    private float armPositionY;
     public LayerMask Ground;
     public bool isGrounded;
 
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerHeight = transform.localScale.y;
-        armposition = arm.transform.position.y;
+        armPositionY = arm.transform.position.y;
         airDrag = groundDrag / 2f;
         slideDrag = groundDrag - airDrag/2f;
         slideTime = maxSlideTime;
@@ -59,11 +61,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Jumping();
         GetInput();
         GroundCheck();
         SpeedControl();
         Sprinting();
         Sliding();
+
+
+        Debug.Log(transform.localPosition);
 
         if (isGrounded && slideInput)
         {
@@ -85,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        Jumping();
+        
         GravityForce();
     }
 
@@ -93,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        jumpInput = Input.GetButton("Jump");
+        jumpInput = Input.GetButtonDown("Jump");
         KeyCode shift = KeyCode.LeftShift;
         sprintInput = Input.GetKey(shift);
         KeyCode crouch = KeyCode.LeftControl;
@@ -126,7 +132,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded)
         {
-            rb.AddForce(Vector3.down * jumpForce, ForceMode.Acceleration);
+            gravity += 125f * Time.deltaTime;
+            rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+           
+        }
+        if (isGrounded)
+        {
+            gravity = 40;
         }
     }
 
@@ -148,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool GroundCheck()
     {
-        return isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.1f, Ground);
+        return isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.1f);
     }
 
     private void Jumping()
@@ -184,26 +196,33 @@ public class PlayerMovement : MonoBehaviour
         {
             slideTime -= Time.deltaTime;
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y - 0.5f, camera.transform.position.z);
-            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y - 0.5f, arm.transform.position.z);
             rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         }
         if (slideInput && !isGrounded && slideTime > 0)
         {
             slideTime -= Time.deltaTime;
-            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y - 0.5f, arm.transform.position.z);
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y - 0.5f, camera.transform.position.z);
         }
         if (slideTime <= 0)
         {
             slideInput = false;
             slideReset = false;
-            arm.transform.position = new Vector3(arm.transform.position.x, armposition, arm.transform.position.z);
+
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
+            
         }
         if (!slideInput)
         {
-            arm.transform.position = new Vector3(arm.transform.position.x, armposition, arm.transform.position.z);
+
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl)) 
+        {
+            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y - 0.3f, arm.transform.position.z);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            arm.transform.position = new Vector3(arm.transform.position.x, arm.transform.position.y + 0.3f, arm.transform.position.z);
         }
     }
 

@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+using UnityEditor.ProBuilder;
 using UnityEngine;
+//using UnityEngine.ProBuilder.Csg;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerAbility : MonoBehaviour
 {
-
-    public GameObject camera;
+    //General
     public int activeAbility = 0;
 
+    //For dash ability (1)
+    public GameObject camera;
     private bool timerRunning = false;
-
     public float dashSpeed = 200f;
     private Rigidbody rb;
     public Animator animator;
+
+    //For block placement ability (2)
+    public GameObject tempBlock;
+    private float extrudeDistance = 1.11f;
+    private float destructionDelay = 5;
+    public int blockCount = 0;
+    public float moveDuration = 0.03f;
+
+    //For hole placement ability (3)
+    public GameObject holePrefab; // The prefab representing the hole
+    public float holeSize = 1f; // Size of the square hole
+    public float duration = 5f; // Duration before the hole disappears
+    public LayerMask layerMask; // Layer mask to filter objects to create the hole in
+
 
     void Start()
     {
@@ -22,8 +43,7 @@ public class PlayerAbility : MonoBehaviour
     private void Update()
     {
 
-        
-        RaycastHit hit;
+
 
         //Ability 1:
         //Button: F
@@ -35,14 +55,14 @@ public class PlayerAbility : MonoBehaviour
             animator.SetInteger("Active_ability", 1);
             Vector3 dashDirection = camera.transform.forward;
             rb.AddForce(dashDirection * dashSpeed, ForceMode.Impulse);
-            StartTimer();
+            DashTimer(1f);
         }
 
         //Ability 2:
         //Button : C
         //Temporarily makes cube at the targeted location, can only be used on certain surfaces
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             activeAbility = 2;
         }
@@ -50,62 +70,148 @@ public class PlayerAbility : MonoBehaviour
         //Ability 3:
         //Button : V
         //Temporarily makes a hole in the targeted object, can only be used on certain surfaces
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             activeAbility = 3;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && activeAbility == 2 && blockCount < 3)
         {
-            activeAbility = 4;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                Material hitMaterial = hitInfo.collider.gameObject.GetComponent<Renderer>().material;
+                if (hitMaterial.name == "Ability material (Instance)")
+                {
+                    animator.SetInteger("Active_ability", 2);
+                    Vector3 cubePosition = hitInfo.point + hitInfo.normal * -extrudeDistance;
+                    GameObject placedObject = Instantiate(tempBlock, cubePosition, Quaternion.identity);
+                    placedObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+                    Destroy(placedObject, destructionDelay);
+                    StartCoroutine(MoveObject(placedObject, hitInfo.point + hitInfo.normal * extrudeDistance));
+                    StartCoroutine(blockTimer());
+                    StartCoroutine(TimerCoroutine(1f, 2));
+                }
+            }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && activeAbility == 2)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && activeAbility == 3 && blockCount < 3)
         {
-            //Instantiate()
+            // Cast a ray from the mouse position into the scene
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                animator.SetInteger("Active_ability", 3);
+                StartCoroutine(TimerCoroutine(1f, 3));
+            }
         }
+        // Check if the ray hits any collider in the scene
 
-
-        //Old abilities
-        // button 1: shrink ray
-        // button 2: growth ray
-        // button 3: hitbox remover
-        // button 4: nothing yet, used for changing colors
-        /*
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit) && activeAbility == 1 && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            hit.transform.localScale = new Vector3(hit.transform.localScale.x * 0.9f, hit.transform.localScale.y * 0.9f, hit.transform.localScale.z * 0.9f);
+            /*
+            CreateHole(obj, hitPoint, hitNormal);
         }
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit) && activeAbility == 2 && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            hit.transform.localScale = new Vector3(hit.transform.localScale.x * 1.1f, hit.transform.localScale.y * 1.1f, hit.transform.localScale.z * 1.1f);
-        }
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit) && activeAbility == 3 && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            hit.collider.enabled = false;
-        }
-        */
     }
-    void StartTimer()
+
+}
+void CreateHole(Vector3 position, Vector3 normal)
+{
+    // Instantiate the hole prefab
+    GameObject holeObject = Instantiate(holePrefab, position, Quaternion.identity);
+
+    // Scale the hole object based on the hole size
+    holeObject.transform.localScale = new Vector3(holeSize, holeSize, holeSize);
+
+    // Ensure that the hole object's normal aligns with the surface normal
+    holeObject.transform.up = normal;
+
+    // Get the target object to subtract the hole from
+    GameObject targetObject = null;
+    Collider[] colliders = Physics.OverlapBox(position, new Vector3(holeSize * 0.5f, holeSize * 0.5f, holeSize * 0.5f));
+    foreach (Collider collider in colliders)
+    {
+        if (collider.gameObject != holeObject)
+        {
+            targetObject = collider.gameObject;
+            break;
+        }
+    }
+
+    // Perform boolean subtraction to create the hole
+    if (targetObject != null)
+    {
+        ProBuilderMesh targetMesh = targetObject.GetComponent<ProBuilderMesh>();
+        if (targetMesh != null)
+        {
+            // Perform boolean subtraction to create the hole
+            PbMeshOperations.Subtract(targetMesh, holeObject.GetComponent<ProBuilderMesh>());
+
+        }
+        else
+        {
+            Debug.LogWarning("Target object doesn't have a ProBuilderMesh component.");
+        }
+    }
+    else
+    {
+        Debug.LogWarning("No target object found to create hole in.");
+    }
+
+    // Destroy the hole object
+    Destroy(holeObject);
+    */
+    }
+
+    
+    void DashTimer(float timeToWait)
     {
         if (!timerRunning)
         {
-            StartCoroutine(TimerCoroutine());
+            StartCoroutine(TimerCoroutine(timeToWait, 0));
         }
     }
 
-    IEnumerator TimerCoroutine()
+    IEnumerator TimerCoroutine(float timeToWait, int abilityDefault)
     {
         timerRunning = true;
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(timeToWait);
 
         animator.SetInteger("Active_ability", 0);
-        activeAbility = 0;
+        activeAbility = abilityDefault;
 
 
         timerRunning = false;
     }
+    IEnumerator MoveObject(GameObject obj, Vector3 targetPosition)
+    {
+
+        yield return new WaitForSeconds(0.4f);
+        Vector3 startPosition = obj.transform.position;
+        float elapsedTime = 0;
+
+        while (elapsedTime < moveDuration)
+        {
+            obj.transform.position = Vector3.Lerp(startPosition, targetPosition, (elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        obj.transform.position = targetPosition;
+    }
+    IEnumerator blockTimer()
+    {
+        blockCount++;
+
+        yield return new WaitForSeconds(5.1f);
+
+        blockCount--;
+    }
+
+
 }

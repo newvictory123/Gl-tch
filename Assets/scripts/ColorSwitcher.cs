@@ -5,11 +5,10 @@ using UnityEngine;
 public class ColorSwitcher : MonoBehaviour
 {
     public PlayerAbility playerAbility;
-    public Color defaultColor = new Color(38, 0,77, 1);
+    public Color defaultColor = Color.magenta;
     public Color ability1Color = Color.yellow;
     public Color ability2Color = Color.green;
     public Color ability3Color = Color.red;
-    public Color ability4Color = Color.white;
 
 
     private new Renderer renderer;
@@ -36,10 +35,7 @@ public class ColorSwitcher : MonoBehaviour
         {
             renderer.material.SetColor("_Glitch_color", ability3Color);
         }
-        if (playerAbility.activeAbility == 4)
-        {
-            renderer.material.SetColor("_Glitch_color", ability4Color);
-        }
+
 
     }
 }

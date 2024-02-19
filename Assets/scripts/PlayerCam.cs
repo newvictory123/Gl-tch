@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     public GameObject player;
+    public GameObject arm;
     public float cameraXMoveSpeed;
     public float cameraYMoveSpeed;
     public float mouseXInput;
     public float mouseYInput;
     public float xRotation;
     public float yRotation;
+
 
     private void Start()
     {
@@ -23,7 +25,8 @@ public class PlayerCam : MonoBehaviour
     private void Update()
     {
         transform.position = new Vector3 (player.transform.position.x, player.transform.position.y + player.transform.localScale.y / 2, player.transform.position.z);
-        
+        //arm.transform.position = new Vector3(player.transform.localPosition.x + 1f, player.transform.localPosition.y - 1.25f, player.transform.localPosition.z + 1f);
+        //arm.transform.rotation = new Quaternion(player.transform.localRotation.x, player.transform.localRotation.y, player.transform.localRotation.z, player.transform.localRotation.w);
         GetInput();
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         player.transform.rotation = Quaternion.Euler(0, yRotation, 0);
