@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,6 +228,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47621898}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
 --- !u!1 &92521022
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   sensitivityMultiplier: 3
+=======
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1 &261454724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,39 +1270,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895713728}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &963194225
+--- !u!1 &963194225 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6960599222869710717, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+  m_PrefabInstance: {fileID: 5202622124168615199}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 963194228}
-  - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
-  m_Layer: 0
-  m_Name: Player Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
---- !u!20 &963194227
+--- !u!20 &963194227 stripped
 Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2559813468319009403, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+  m_PrefabInstance: {fileID: 5202622124168615199}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
@@ -1381,6 +1362,8 @@ MonoBehaviour:
   mouseYInput: 0
   xRotation: 0
   yRotation: 0
+=======
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1 &980700138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,6 +1679,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060060513}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
 --- !u!1 &1136355525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1711,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1546408660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1 &1433762506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1818,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433762506}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
 --- !u!1 &1479599503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,6 +1924,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479599503}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+=======
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1 &1482643370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,12 +1960,12 @@ Transform:
   - {fileID: 895713729}
   m_Father: {fileID: 1965527744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1533409909
+--- !u!1 &1533409909 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3806204789075583799, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+  m_PrefabInstance: {fileID: 7396917209123719316}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533409913}
@@ -2152,6 +2141,12 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
+=======
+--- !u!114 &1533409916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8076524743044505160, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+  m_PrefabInstance: {fileID: 7396917209123719316}
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533409909}
   m_Enabled: 1
@@ -2159,6 +2154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1fe38a1645f4ef4989dcf7b0e4acae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
   activeAbility: 0
   camera: {fileID: 963194225}
   dashSpeed: 500
@@ -2426,6 +2422,8 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1 &1927620540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,6 +2652,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
 --- !u!64 &2014775385
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2677,11 +2676,15 @@ MeshCollider:
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &2088553454
+=======
+--- !u!1001 &5202622124168615199
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
     m_TransformParent: {fileID: 1546408660}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b1a99812881c29d4e9c025710b0032a8, type: 3}
@@ -2812,14 +2815,142 @@ MonoBehaviour:
   ability1Color: {r: 1, g: 1, b: 0, a: 1}
   ability2Color: {r: 0, g: 1, b: 0.057418108, a: 1}
   ability3Color: {r: 1, g: 0, b: 0.06979704, a: 1}
+=======
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 234069546420551309, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1533409909}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000014290032
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443513329134275658, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960599222869710717, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+      propertyPath: m_Name
+      value: Player Camera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f29dc26670e19804db7797ec3c253f24, type: 3}
+--- !u!1001 &7396917209123719316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768704075810472406, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806204789075583799, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778970365407319839, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 8076524743044505160, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194225}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 725c282e1292fae4f85686ec98e44885, type: 3}
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 1965527744}
+<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
   - {fileID: 963194228}
   - {fileID: 1533409913}
+=======
+  - {fileID: 5202622124168615199}
+  - {fileID: 7396917209123719316}
+  - {fileID: 532652270}
+>>>>>>> Stashed changes:Assets/Scenes/Testing scene.unity
   - {fileID: 2014775384}
   - {fileID: 1660541392}
   - {fileID: 532421374}
