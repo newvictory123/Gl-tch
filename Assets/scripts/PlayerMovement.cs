@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlideTime;
     public float slideTime;
 
-    public Camera camera;
+    public new Camera camera;
     public GameObject arm;
 
     private void Start()
