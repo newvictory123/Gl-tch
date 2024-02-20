@@ -6,8 +6,6 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEditor.ProBuilder;
 using UnityEngine;
-//using UnityEngine.ProBuilder.Csg;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerAbility : MonoBehaviour
 {
@@ -42,8 +40,6 @@ public class PlayerAbility : MonoBehaviour
 
     private void Update()
     {
-
-
 
         //Ability 1:
         //Button: F
@@ -107,8 +103,17 @@ public class PlayerAbility : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo))
             {
-                animator.SetInteger("Active_ability", 3);
-                StartCoroutine(TimerCoroutine(1f, 3));
+                Material hitMaterial = hitInfo.collider.gameObject.GetComponent<Renderer>().material;
+                if (hitMaterial.name == "Ability material (Instance)")
+                {
+                    animator.SetInteger("Active_ability", 3);
+                    Vector3 cubePosition = hitInfo.point + hitInfo.normal * -extrudeDistance;
+                    GameObject placedObject = Instantiate(tempBlock, cubePosition, Quaternion.identity);
+                    placedObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+                    //StartCoroutine(MoveObject(placedObject, hitInfo.point + hitInfo.normal * extrudeDistance));
+                    StartCoroutine(blockTimer());
+                    StartCoroutine(TimerCoroutine(1f, 3));
+                }
             }
         }
         // Check if the ray hits any collider in the scene
