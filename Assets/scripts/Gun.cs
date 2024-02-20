@@ -8,7 +8,11 @@ public class Gun : MonoBehaviour {
     [Header("References")]
     [SerializeField] private GunData gunData;
     [SerializeField] private Transform cam;
-    
+
+    public Transform spawnpoint;
+    public GameObject Projectileprefab;
+    public float projectilevelocity;
+
     float timeSinceLastShot;
 
     private void Start() {
@@ -43,6 +47,8 @@ public class Gun : MonoBehaviour {
                     damageable?.TakeDamage(gunData.damage);
                 }
 
+                var projectile = Instantiate(Projectileprefab, spawnpoint.position, spawnpoint.rotation);
+                projectile.GetComponent<Rigidbody>().velocity = spawnpoint.forward * projectilevelocity;
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
                 OnGunShot();

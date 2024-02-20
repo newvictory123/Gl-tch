@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cdfc08c0f803741a5a8080444f19a7, type: 3}
   m_Name: FastFire
   m_EditorClassIdentifier: 
-  name: FasFire
-  damage: 1000
-  maxDistance: 10
+  name: 
+  damage: 0
+  maxDistance: 0
   currentAmmo: 0
-  magSize: 30
-  fireRate: 1
-  reloadTime: 2
+  magSize: 0
+  fireRate: 0
+  reloadTime: 0
   reloading: 0
