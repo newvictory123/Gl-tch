@@ -19,6 +19,11 @@ public class PlayerAbility : MonoBehaviour
     private Rigidbody rb;
     public Animator animator;
 
+    //Booleans for deactivating
+    private bool ability1active;
+    private bool ability2active;
+    private bool ability3active;
+
     //For block placement ability (2)
     public GameObject tempBlock;
     private float extrudeDistance = 1.11f;
@@ -60,7 +65,16 @@ public class PlayerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            activeAbility = 2;
+            if (ability2active == false)
+            {
+                activeAbility = 2;
+                ability2active = true;
+            }
+            else
+            {
+                activeAbility = 0;
+                ability2active = false;
+            }
         }
 
         //Ability 3:
@@ -68,7 +82,16 @@ public class PlayerAbility : MonoBehaviour
         //Temporarily makes a hole in the targeted object, can only be used on certain surfaces
         if (Input.GetKeyDown(KeyCode.V))
         {
-            activeAbility = 3;
+            if (ability2active == false)
+            {
+                activeAbility = 3;
+                ability2active = true;
+            }
+            else
+            {
+                activeAbility = 0;
+                ability2active = false;
+            }
         }
 
 
