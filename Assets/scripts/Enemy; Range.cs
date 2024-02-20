@@ -11,8 +11,6 @@ public class Enemy_Range : MonoBehaviour
     public GameObject spawnPoint;
     public CharacterController controller;
     public Vector3 moveDirection;
-    public ParticleSystem ps;
-    public MeshRenderer mR;
     public Transform[] movePoints;
     public Vector3 velocity;
 
@@ -36,8 +34,6 @@ public class Enemy_Range : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         controller = GetComponent<CharacterController>();
-        ps = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
-        mR = GetComponent<MeshRenderer>();
         indexOfTarget = -1;
         NextTarget();
         LookAtTarget();
