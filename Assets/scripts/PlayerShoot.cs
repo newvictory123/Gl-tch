@@ -12,7 +12,6 @@ public class PlayerShoot : MonoBehaviour
     public GameObject Projectileprefab;
     public float projectilevelocity;
 
-
     [SerializeField] private KeyCode reloadKey = KeyCode.R;
 
     private void Update()
