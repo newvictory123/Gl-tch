@@ -15,7 +15,7 @@ MonoBehaviour:
   name: FasFire
   damage: 1000
   maxDistance: 110000
-  currentAmmo: 21
+  currentAmmo: 0
   magSize: 30
   fireRate: 600
   reloadTime: 2
