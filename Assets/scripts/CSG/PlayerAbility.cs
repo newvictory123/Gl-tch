@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
-using UnityEditor.ProBuilder;
 using UnityEngine;
+using UnityEngine.ProBuilder;
+using UnityEngine.ProBuilder.Csgreal;
 
 public class PlayerAbility : MonoBehaviour
 {
@@ -32,10 +32,8 @@ public class PlayerAbility : MonoBehaviour
     public float moveDuration = 0.03f;
 
     //For hole placement ability (3)
-    public GameObject holePrefab; // The prefab representing the hole
-    public float holeSize = 1f; // Size of the square hole
-    public float duration = 5f; // Duration before the hole disappears
-    public LayerMask layerMask; // Layer mask to filter objects to create the hole in
+    UnityEngine.ProBuilder.Csgreal.Model HoledObject;
+
 
 
     void Start()
@@ -130,12 +128,28 @@ public class PlayerAbility : MonoBehaviour
                 if (hitMaterial.name == "Ability material (Instance)")
                 {
                     animator.SetInteger("Active_ability", 3);
+
+                    // Get the GameObject that the raycast hit
+                    GameObject hitObject = hitInfo.collider.gameObject;
+
                     Vector3 cubePosition = hitInfo.point + hitInfo.normal * -extrudeDistance;
                     GameObject placedObject = Instantiate(tempBlock, cubePosition, Quaternion.identity);
                     placedObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                     //StartCoroutine(MoveObject(placedObject, hitInfo.point + hitInfo.normal * extrudeDistance));
                     StartCoroutine(blockTimer());
                     StartCoroutine(TimerCoroutine(1f, 3));
+
+                    //Instantiate(tempBlock, cubePosition, Quaternion.identity);
+
+                    //CSGreal.BooleanOp booleanOp = CSGreal.BooleanOp.Subtraction;
+                    //HoledObject = CSGreal.Perform(booleanOp, hitObject, placedObject);
+
+                   
+                    
+                    //Instantiate(HoledObject, cubePosition, Quaternion.identity);
+                    //CSGreal.Subtract(hitObject, placedObject);
+                    //Debug.Log(CSGreal.Subtract(hitObject, placedObject));
+
                 }
             }
         }
