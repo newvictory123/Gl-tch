@@ -12,6 +12,7 @@ public class Enemy_Melee : MonoBehaviour
     public Vector3 moveDirection;
     public ParticleSystem ps;
     public MeshRenderer mR;
+    public Collider c;
     public Transform[] movePoints;
 
     [Header("Stats")]
@@ -29,8 +30,10 @@ public class Enemy_Melee : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         controller = GetComponent<CharacterController>();
-        ps = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
+        //ps = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
+        ps = transform.Find("Sparks").GetComponent<ParticleSystem>();
         mR = GetComponent<MeshRenderer>();
+        c = GetComponent<Collider>();
         indexOfTarget = -1;
         NextTarget();
         LookAtTarget();
@@ -60,6 +63,7 @@ public class Enemy_Melee : MonoBehaviour
         //yield return new WaitForSeconds(1f);
 
         mR.enabled = false;
+        c.enabled = false;
 
         ps.Play();
 
