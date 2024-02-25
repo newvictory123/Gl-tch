@@ -68,9 +68,6 @@ public class PlayerMovement : MonoBehaviour
         Sprinting();
         Sliding();
 
-
-        Debug.Log(transform.localPosition);
-
         if (isGrounded && slideInput)
         {
             rb.drag = slideDrag;
