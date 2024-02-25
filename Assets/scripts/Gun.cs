@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
 
     [Header("References")]
-    [SerializeField] private GunData gunData;
+    public GunData gunData;
     [SerializeField] private Transform cam;
 
     public Transform spawnpoint;
