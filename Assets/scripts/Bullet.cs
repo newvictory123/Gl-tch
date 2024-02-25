@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
 
     public Player_Mechanics PM;
+    public float damage;
 
 
     private void Awake()
@@ -16,9 +17,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.tag == "Player" && transform.tag == "Enemy_Bullet") 
         {
-            PM.currentHealth -= 1;
+            PM.currentHealth -= damage;
             Destroy(gameObject);
         }
     }
