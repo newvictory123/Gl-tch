@@ -24,12 +24,4 @@ public class Player_Mechanics : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy_Bullet")
-        {
-            currentHealth -= 1;
-        }
-    }
-
 }
