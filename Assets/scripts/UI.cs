@@ -24,12 +24,12 @@ public class UI : MonoBehaviour
     {
         Ammo = GameObject.Find("Arm").GetComponent<Gun>().gunData.currentAmmo.ToString();
         //CurrentAM = GameObject.Find("Current Ammo").GetComponent<Text>();
-        //HB = GameObject.Find("Green bar").GetComponent<Image>();
-        //a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
-        //a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
+        HB = GameObject.Find("Greenbar").GetComponent<Image>();
+        a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
+        a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
         a_3 = GameObject.Find("Toggle_dash").GetComponent<Toggle>();
-        //a_1.isOn = false;
-        //a_2.isOn = false;
+        a_1.isOn = false;
+        a_2.isOn = false;
         a_3.isOn = false;
     }
 
