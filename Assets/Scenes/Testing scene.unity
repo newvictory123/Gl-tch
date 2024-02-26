@@ -2815,26 +2815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAbility: {fileID: 1533409916}
-  defaultColor:
-    r: 0.37768176
-    g: 0
-    b: 0.7490196
-    a: 1
-  ability1Color:
-    r: 1
-    g: 1
-    b: 0
-    a: 1
-  ability2Color:
-    r: 0
-    g: 1
-    b: 0.057418108
-    a: 1
-  ability3Color:
-    r: 1
-    g: 0
-    b: 0.06979704
-    a: 1
+  defaultColor: {r: 0.37768176, g: 0, b: 0.7490196, a: 1}
+  ability1Color: {r: 1, g: 1, b: 0, a: 1}
+  ability2Color: {r: 0, g: 1, b: 0.057418108, a: 1}
+  ability3Color: {r: 1, g: 0, b: 0.06979704, a: 1}
 --- !u!1001 &1421176177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4443,26 +4427,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAbility: {fileID: 1533409916}
-  defaultColor:
-    r: 0.37768176
-    g: 0
-    b: 0.7490196
-    a: 1
-  ability1Color:
-    r: 1
-    g: 1
-    b: 0
-    a: 1
-  ability2Color:
-    r: 0
-    g: 1
-    b: 0.057418108
-    a: 1
-  ability3Color:
-    r: 1
-    g: 0
-    b: 0.06979704
-    a: 1
+  defaultColor: {r: 0.37768176, g: 0, b: 0.7490196, a: 1}
+  ability1Color: {r: 1, g: 1, b: 0, a: 1}
+  ability2Color: {r: 0, g: 1, b: 0.057418108, a: 1}
+  ability3Color: {r: 1, g: 0, b: 0.06979704, a: 1}
 --- !u!1001 &8474497329524025399
 PrefabInstance:
   m_ObjectHideFlags: 0

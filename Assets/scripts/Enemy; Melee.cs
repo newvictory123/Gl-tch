@@ -14,6 +14,7 @@ public class Enemy_Melee : MonoBehaviour
     public MeshRenderer mR;
     public Collider c;
     public Transform[] movePoints;
+    public Animator animator;
 
     [Header("Stats")]
     public float moveSpeed;
@@ -22,6 +23,9 @@ public class Enemy_Melee : MonoBehaviour
     public float deathRange;
     private int indexOfTarget;
     private Vector3 targetPosition;
+
+    public float maxHealth;
+    public float currentHealth;
 
     private State state = State.Patrol;
     NavMeshAgent agent;
@@ -37,6 +41,9 @@ public class Enemy_Melee : MonoBehaviour
         indexOfTarget = -1;
         NextTarget();
         LookAtTarget();
+        currentHealth = maxHealth;
+
+        animator.SetFloat("Movespeed", 1f);
     }
 
     // Update is called once per frame
@@ -54,20 +61,31 @@ public class Enemy_Melee : MonoBehaviour
                 Chase();
                 break;
         }
+
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+
     }
 
 
     IEnumerator Exsplode()
     {
+        animator.SetBool("IsExploding", true);
 
         //yield return new WaitForSeconds(1f);
 
         mR.enabled = false;
         c.enabled = false;
 
+        yield return new WaitForSeconds(0.25f);
+
         ps.Play();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
 
@@ -160,6 +178,7 @@ public class Enemy_Melee : MonoBehaviour
     {
         if (GetDistanceToPlayer() < deathRange)
         {
+            agent.SetDestination(transform.position);
             StartCoroutine(Exsplode());
         }
 
@@ -170,6 +189,7 @@ public class Enemy_Melee : MonoBehaviour
 
         LookAtPlayer();
         Vector3 velocity = player.transform.position - transform.position;
+        velocity.y = 0f;
         velocity.Normalize();
         velocity *= moveSpeed * Time.deltaTime;
         controller.Move(velocity);
@@ -181,7 +201,13 @@ public class Enemy_Melee : MonoBehaviour
         }
     }
 
-
+    public void OnCollisionEnter(Collision Col)
+    {
+        if (Col.transform.tag == "Enemy_Bullet")
+        {
+            currentHealth -= 1f;
+        }
+    }
 
 
     enum State

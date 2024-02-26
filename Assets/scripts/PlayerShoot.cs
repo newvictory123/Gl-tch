@@ -24,7 +24,6 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyDown(reloadKey))
         {
                 reloadInput?.Invoke();
-        }
-            
+        }  
     }
 }
