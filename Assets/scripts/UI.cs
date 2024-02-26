@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -23,44 +24,18 @@ public class UI : MonoBehaviour
     void Start()
     {
         Ammo = GameObject.Find("Arm").GetComponent<Gun>().gunData.currentAmmo.ToString();
-        //CurrentAM = GameObject.Find("Current Ammo").GetComponent<Text>();
+        CurrentAM = GameObject.Find("Current_Ammo").GetComponent<Text>();
         HB = GameObject.Find("Greenbar").GetComponent<Image>();
-        a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
-        a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
         a_3 = GameObject.Find("Toggle_dash").GetComponent<Toggle>();
-        a_1.isOn = false;
-        a_2.isOn = false;
         a_3.isOn = false;
+        UnityEngine.Debug.Log(CurrentAM);
     }
 
     // Update is called once per frame
     public void Update()
     {
-        Debug.Log(Ammo);
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (a_2.isOn == true)
-            {
-                a_2.isOn = false;
-            }
-            else if (a_2.isOn == false)
-            {
-                a_2.isOn = true;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            if (a_1.isOn == true)
-            {
-                a_1.isOn = false;
-            }
-            else if (a_1.isOn == false)
-            {
-                a_1.isOn = true;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             a_3.isOn = true;
             StartCoroutine(Toggleoffdelay());
@@ -73,7 +48,7 @@ public class UI : MonoBehaviour
 
     private IEnumerator Toggleoffdelay()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         a_3.isOn = false;
     }
 

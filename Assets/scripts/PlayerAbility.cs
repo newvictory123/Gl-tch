@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.ProBuilder;
+using UnityEngine.UI;
 
 public class PlayerAbility : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class PlayerAbility : MonoBehaviour
     public int blockCount = 0;
     public float moveDuration = 0.25f;
 
+    //For UI
+    private Toggle a_1;
+    private Toggle a_2;
+
 
     //For hole placement ability (3)
     //UnityEngine.ProBuilder.Csgreal.Model HoledObject;
@@ -38,6 +43,10 @@ public class PlayerAbility : MonoBehaviour
 
     void Start()
     {
+        a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
+        a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
+        a_1.isOn = false;
+        a_2.isOn = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -68,11 +77,15 @@ public class PlayerAbility : MonoBehaviour
             {
                 activeAbility = 2;
                 ability2active = true;
+                a_2.isOn = true;
+                a_1.isOn = false;
             }
-            else
+            else if (ability2active == true)
             {
                 activeAbility = 0;
                 ability2active = false;
+                a_2.isOn = false;
+                
             }
         }
 
@@ -84,12 +97,16 @@ public class PlayerAbility : MonoBehaviour
             if (ability3active == false)
             {
                 activeAbility = 3;
-                ability2active = true;
+                ability3active = true;
+                a_1.isOn = true;
+                a_2.isOn = false;
             }
-            else
+            else if (ability3active == true)
             {
                 activeAbility = 0;
-                ability2active = false;
+                ability3active = false;
+                a_1.isOn = false;
+                
             }
         }
 
@@ -111,7 +128,7 @@ public class PlayerAbility : MonoBehaviour
                     placedObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                     Destroy(placedObject, destructionDelay);
                     StartCoroutine(MoveObject(placedObject, hitInfo.point + hitInfo.normal * extrudeDistance));
-                    StartCoroutine(blockTimer());
+                    StartCoroutine(BlockTimer());
                     StartCoroutine(AnimationTimer(1f, 2));
                 }
             }
@@ -184,7 +201,7 @@ public class PlayerAbility : MonoBehaviour
 
         obj.transform.position = targetPosition;
     }
-    IEnumerator blockTimer()
+    IEnumerator BlockTimer()
     {
         blockCount++;
 

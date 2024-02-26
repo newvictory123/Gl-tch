@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour {
 
@@ -12,12 +13,14 @@ public class Gun : MonoBehaviour {
     public Transform spawnpoint;
     public GameObject Projectileprefab;
     public float projectilevelocity;
+    private Text AmmoUICount;
 
     float timeSinceLastShot;
 
     private void Start() {
         PlayerShoot.shootInput += Shoot;
         PlayerShoot.reloadInput += StartReload;
+        AmmoUICount = GameObject.Find("Current_Ammo").GetComponent<Text>();
     }
 
     private void OnDisable() => gunData.reloading = false;
@@ -60,6 +63,8 @@ public class Gun : MonoBehaviour {
         timeSinceLastShot += Time.deltaTime;
 
         Debug.DrawRay(cam.position, cam.forward * gunData.maxDistance);
+
+        AmmoUICount.text = gunData.currentAmmo.ToString();
     }
 
     private void OnGunShot() {  }
