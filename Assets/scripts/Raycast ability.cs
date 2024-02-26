@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Raycastability : MonoBehaviour
 {
-    public float pointWidth = 1;
-    public float pointHeight = 1;
-    public float pointLength = 1;
+    public float pointWidth = 2;
+    public float pointHeight = 2;
+    public float pointLength = 2;
     public bool active;
     public PlayerAbility PA;
     public GameObject Player;
