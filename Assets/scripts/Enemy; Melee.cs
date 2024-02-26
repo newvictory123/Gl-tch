@@ -178,7 +178,6 @@ public class Enemy_Melee : MonoBehaviour
     {
         if (GetDistanceToPlayer() < deathRange)
         {
-            agent.SetDestination(transform.position);
             StartCoroutine(Exsplode());
         }
 
@@ -201,13 +200,7 @@ public class Enemy_Melee : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision Col)
-    {
-        if (Col.transform.tag == "Enemy_Bullet")
-        {
-            currentHealth -= 1f;
-        }
-    }
+
 
 
     enum State

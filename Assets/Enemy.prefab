@@ -5160,7 +5160,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 14
+  m_Height: 14.15
   m_Radius: 2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -5185,7 +5185,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 15
+  m_Height: 14.98
   m_BaseOffset: 3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -5215,7 +5215,7 @@ MonoBehaviour:
   visionRange: 10
   visionAngle: 90
   deathRange: 5
-  maxHealth: 10
+  maxHealth: 0
   currentHealth: 0
 --- !u!95 &6977736952213223349
 Animator:

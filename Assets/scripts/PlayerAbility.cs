@@ -26,7 +26,7 @@ public class PlayerAbility : MonoBehaviour
 
     //For block placement ability (2)
     public GameObject tempBlock;
-    private float extrudeDistance = 2.1f;
+    private float extrudeDistance = 1.11f;
     private float destructionDelay = 15;
     public int blockCount = 0;
     public float moveDuration = 0.25f;
@@ -43,10 +43,10 @@ public class PlayerAbility : MonoBehaviour
 
     void Start()
     {
-        //a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
-        //a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
-        //a_1.isOn = false;
-        //a_2.isOn = false;
+        a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
+        a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
+        a_1.isOn = false;
+        a_2.isOn = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -77,14 +77,14 @@ public class PlayerAbility : MonoBehaviour
             {
                 activeAbility = 2;
                 ability2active = true;
-                //a_2.isOn = true;
-                //a_1.isOn = false;
+                a_2.isOn = true;
+                a_1.isOn = false;
             }
             else if (ability2active == true)
             {
                 activeAbility = 0;
                 ability2active = false;
-                //a_2.isOn = false;
+                a_2.isOn = false;
                 
             }
         }
@@ -98,14 +98,14 @@ public class PlayerAbility : MonoBehaviour
             {
                 activeAbility = 3;
                 ability3active = true;
-                //a_1.isOn = true;
-                //a_2.isOn = false;
+                a_1.isOn = true;
+                a_2.isOn = false;
             }
             else if (ability3active == true)
             {
                 activeAbility = 0;
                 ability3active = false;
-                //_1.isOn = false;
+                a_1.isOn = false;
                 
             }
         }
