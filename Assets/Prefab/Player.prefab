@@ -29,22 +29,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 4470999332822669729}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.16193114, z: 0, w: 0.9868021}
-  m_LocalPosition: {x: 2.5191536, y: 5.1630554, z: -0.12828806}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4884458597551781827}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1959137880853915923
-=======
-=======
->>>>>>> Stashed changes
   m_GameObject: {fileID: 792440122459784379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}

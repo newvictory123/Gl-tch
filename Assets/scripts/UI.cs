@@ -48,7 +48,7 @@ public class UI : MonoBehaviour
 
     private IEnumerator Toggleoffdelay()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.5f);
         a_3.isOn = false;
     }
 
