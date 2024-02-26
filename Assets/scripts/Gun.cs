@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour {
         gunData.reloading = false;
     }
 
-    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f) && FindObjectOfType<PlayerAbility>().activeAbility == 0;
 
     private void Shoot() {
         if (gunData.currentAmmo > 0) {
