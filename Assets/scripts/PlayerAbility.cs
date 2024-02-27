@@ -11,34 +11,28 @@ public class PlayerAbility : MonoBehaviour
 {
     //General
     public int activeAbility = 0;
-
-    //Booleans for deactivating
-    private bool ability2active;
-    private bool ability3active;
+    int previousAbility;
+    public Animator animator;
+    public GameObject camera;
 
     //For dash ability (1)
-    public GameObject camera;
     private bool timerRunning = false;
     public float dashSpeed = 200f;
     private Rigidbody rb;
-    public Animator animator;
     bool onCoolDown = false;
 
     //For block placement ability (2)
     public GameObject tempBlock;
     private float extrudeDistance = 1.11f;
     private float destructionDelay = 15;
-    public int blockCount = 0;
     public float moveDuration = 0.25f;
+    public int blockCount = 0;
+
 
     //For UI
     private Toggle a_1;
     private Toggle a_2;
     private Text CubeCounter;
-
-
-    //For hole placement ability (3)
-    //UnityEngine.ProBuilder.Csgreal.Model HoledObject;
 
 
 
@@ -62,11 +56,12 @@ public class PlayerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && !onCoolDown)
         {
+            previousAbility = activeAbility;
             activeAbility = 1;
             animator.SetInteger("Active_ability", 1);
             Vector3 dashDirection = camera.transform.forward;
             rb.AddForce(dashDirection * dashSpeed, ForceMode.Impulse);
-            DashTimer(1f);
+            DashTimer(1f, previousAbility);
             StartCoroutine(CoolDownTimer(2.5f));
         }
 
@@ -76,17 +71,15 @@ public class PlayerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (ability2active == false)
+            if (activeAbility == 0)
             {
                 activeAbility = 2;
-                ability2active = true;
                 a_2.isOn = true;
                 a_1.isOn = false;
             }
-            else if (ability2active == true)
+            else if (activeAbility == 2)
             {
                 activeAbility = 0;
-                ability2active = false;
                 a_2.isOn = false;
                 
             }
@@ -97,23 +90,21 @@ public class PlayerAbility : MonoBehaviour
         //Temporarily makes a hole in the targeted object, can only be used on certain surfaces
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (ability3active == false)
+            if (activeAbility != 3)
             {
                 activeAbility = 3;
-                ability3active = true;
                 a_1.isOn = true;
                 a_2.isOn = false;
             }
-            else if (ability3active == true)
+            else if (activeAbility == 3)
             {
                 activeAbility = 0;
-                ability3active = false;
                 a_1.isOn = false;
                 
             }
         }
 
-
+        //Logic for ability 2
         if (Input.GetKeyDown(KeyCode.Mouse0) && activeAbility == 2 && blockCount < 3)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -137,7 +128,7 @@ public class PlayerAbility : MonoBehaviour
             }
         }
 
-
+        //Logic for ability 3
         if (Input.GetKeyDown(KeyCode.Mouse0) && activeAbility == 3 && blockCount < 3)
         {
             // Cast a ray from the mouse position into the scene
@@ -157,11 +148,11 @@ public class PlayerAbility : MonoBehaviour
     }
 
     
-    void DashTimer(float timeToWait)
+    void DashTimer(float timeToWait, int abilityDefault)
     {
         if (!timerRunning)
         {
-            StartCoroutine(AnimationTimer(timeToWait, 0));
+            StartCoroutine(AnimationTimer(timeToWait, abilityDefault));
         }
     }
 
@@ -176,8 +167,6 @@ public class PlayerAbility : MonoBehaviour
 
         timerRunning = false;
     }
-
-
 
     IEnumerator CoolDownTimer(float timeToWait)
     {
