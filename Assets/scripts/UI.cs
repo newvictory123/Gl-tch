@@ -12,8 +12,6 @@ public class UI : MonoBehaviour
     
     private Text CurrentAM;
     private Image HB;
-    private Toggle a_1;
-    private Toggle a_2;
     private Toggle a_3;
     private float playerhealth = 100f;
     private readonly float damage = 10f;
