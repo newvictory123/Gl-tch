@@ -200,7 +200,13 @@ public class Enemy_Melee : MonoBehaviour
         }
     }
 
-
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player_Bullet")
+        {
+            currentHealth -= 1;
+        }
+    }
 
 
     enum State

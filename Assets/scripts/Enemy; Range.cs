@@ -27,6 +27,9 @@ public class Enemy_Range : MonoBehaviour
     private int indexOfTarget;
     private Vector3 targetPosition;
 
+    public float maxHealth;
+    public float currentHealth;
+
     public State state = State.Patrol;
     NavMeshAgent agent;
 
@@ -37,6 +40,7 @@ public class Enemy_Range : MonoBehaviour
         indexOfTarget = -1;
         NextTarget();
         LookAtTarget();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -191,6 +195,13 @@ public class Enemy_Range : MonoBehaviour
         Destroy(bulletObj, 5f);
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player_Bullet")
+        {
+            currentHealth -= 1;
+        }
+    }
 
     public enum State
     {
