@@ -34,6 +34,7 @@ public class PlayerAbility : MonoBehaviour
     //For UI
     private Toggle a_1;
     private Toggle a_2;
+    private Text CubeCounter;
 
 
     //For hole placement ability (3)
@@ -45,14 +46,16 @@ public class PlayerAbility : MonoBehaviour
     {
         a_1 = GameObject.Find("Toggle_destroy").GetComponent<Toggle>();
         a_2 = GameObject.Find("Toggle_build").GetComponent<Toggle>();
+        CubeCounter = GameObject.Find("Current_Cube").GetComponent<Text>();
         a_1.isOn = false;
         a_2.isOn = false;
+        CubeCounter.text = 0.ToString();
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-
+        CubeCounter.text = blockCount.ToString();
         //Ability 1:
         //Button: F
         //Description: Omnidirectional dash (dashes where you are facing)
