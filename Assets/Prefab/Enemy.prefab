@@ -4856,15 +4856,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cc354fc81675194f80e8ff50c6dfae8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.06
+      value: -78.47
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cc354fc81675194f80e8ff50c6dfae8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.12
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cc354fc81675194f80e8ff50c6dfae8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.7046976
+      value: 42.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cc354fc81675194f80e8ff50c6dfae8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5210,12 +5210,14 @@ MonoBehaviour:
   movePoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   animator: {fileID: 6977736952213223349}
   moveSpeed: 2
   visionRange: 10
   visionAngle: 90
   deathRange: 5
-  maxHealth: 0
+  maxHealth: 100
   currentHealth: 0
 --- !u!95 &6977736952213223349
 Animator:
