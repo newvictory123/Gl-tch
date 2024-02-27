@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour {
     public GameObject Projectileprefab;
     public float projectilevelocity;
     private Text AmmoUICount;
+    private Text AmmoUIMax;
 
     float timeSinceLastShot;
 
@@ -21,6 +22,8 @@ public class Gun : MonoBehaviour {
         PlayerShoot.shootInput += Shoot;
         PlayerShoot.reloadInput += StartReload;
         AmmoUICount = GameObject.Find("Current_Ammo").GetComponent<Text>();
+        AmmoUIMax = GameObject.Find("Max_Ammo").GetComponent <Text>();
+        
     }
 
     private void OnDisable() => gunData.reloading = false;
@@ -65,6 +68,7 @@ public class Gun : MonoBehaviour {
         Debug.DrawRay(cam.position, cam.forward * gunData.maxDistance);
 
         AmmoUICount.text = gunData.currentAmmo.ToString();
+        AmmoUIMax.text = gunData.magSize.ToString();
     }
 
     private void OnGunShot() {  }
