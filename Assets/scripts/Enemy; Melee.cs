@@ -17,6 +17,7 @@ public class Enemy_Melee : MonoBehaviour
     public Collider c;
     public Transform[] movePoints;
     public Animator animator;
+    public Player_Mechanics player_Mechanics;
 
     [Header("Stats")]
     public float moveSpeed;
@@ -25,6 +26,7 @@ public class Enemy_Melee : MonoBehaviour
     public float deathRange;
     private int indexOfTarget;
     private Vector3 targetPosition;
+    public float playerDistance;
 
     public float maxHealth;
     public float currentHealth;
@@ -34,7 +36,7 @@ public class Enemy_Melee : MonoBehaviour
 
     private Gun currentGunData;
 
-    
+
 
 
     private void Start()
@@ -45,6 +47,8 @@ public class Enemy_Melee : MonoBehaviour
         ps = transform.Find("Sparks").GetComponent<ParticleSystem>();
         mR = GetComponent<MeshRenderer>();
         c = GetComponent<Collider>();
+        player_Mechanics = GameObject.Find("player").GetComponent<Player_Mechanics>();
+
         indexOfTarget = -1;
         NextTarget();
         LookAtTarget();
@@ -71,6 +75,7 @@ public class Enemy_Melee : MonoBehaviour
                 break;
         }
 
+        playerDistance = GetDistanceToPlayer();
 
         if (currentHealth <= 0)
         {
@@ -105,6 +110,10 @@ public class Enemy_Melee : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         ps.Play();
+        if (playerDistance <= deathRange + 1f)
+        {
+            player_Mechanics.currentHealth -= 0.25f;
+        }
 
         yield return new WaitForSeconds(1f);
 
@@ -182,6 +191,7 @@ public class Enemy_Melee : MonoBehaviour
 
     void Patrol()
     {
+        animator.SetFloat("Movespeed", 1f);
         if (CanSeePlayer())
         {
             state = State.Chase;
@@ -197,6 +207,7 @@ public class Enemy_Melee : MonoBehaviour
 
     void Chase()
     {
+        animator.SetFloat("Movespeed", 1f);
         if (GetDistanceToPlayer() < deathRange)
         {
             StartCoroutine(Exsplode());
