@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.ProBuilder;
@@ -30,6 +32,11 @@ public class Enemy_Melee : MonoBehaviour
     private State state = State.Patrol;
     NavMeshAgent agent;
 
+    private Gun currentGunData;
+
+    
+
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -44,6 +51,8 @@ public class Enemy_Melee : MonoBehaviour
         currentHealth = maxHealth;
 
         animator.SetFloat("Movespeed", 1f);
+
+        currentGunData = GameObject.Find("Arm").GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -67,6 +76,18 @@ public class Enemy_Melee : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartCoroutine(armtimer("Arm"));
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartCoroutine(armtimer("ArmSlow"));
+        }
+
 
 
     }
@@ -204,7 +225,7 @@ public class Enemy_Melee : MonoBehaviour
     {
         if (collision.transform.tag == "Player_Bullet")
         {
-            currentHealth -= 1;
+            currentHealth -= currentGunData.gunData.damage;
         }
     }
 
@@ -215,5 +236,10 @@ public class Enemy_Melee : MonoBehaviour
         Chase,
     }
 
+    IEnumerator armtimer(string armname)
+    {
+        yield return new WaitForSeconds(0.2f);
+        currentGunData = GameObject.Find(armname).GetComponent<Gun>();
+    }
 
 }

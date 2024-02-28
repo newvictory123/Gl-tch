@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Gun
   m_EditorClassIdentifier: 
   name: SingleFire
-  damage: 20
+  damage: 40
   maxDistance: 300
-  currentAmmo: 6
+  currentAmmo: 10
   magSize: 10
   fireRate: 50
   reloadTime: 1

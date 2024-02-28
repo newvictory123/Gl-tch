@@ -33,6 +33,8 @@ public class Enemy_Range : MonoBehaviour
     public State state = State.Patrol;
     NavMeshAgent agent;
 
+    private Gun currentGunData;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -41,6 +43,7 @@ public class Enemy_Range : MonoBehaviour
         NextTarget();
         LookAtTarget();
         currentHealth = maxHealth;
+        currentGunData = GameObject.Find("Arm").GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -61,6 +64,10 @@ public class Enemy_Range : MonoBehaviour
             case State.Shoot:
                 Shoot();
                 break;
+        }
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -199,7 +206,7 @@ public class Enemy_Range : MonoBehaviour
     {
         if (collision.transform.tag == "Player_Bullet")
         {
-            currentHealth -= 1;
+            currentHealth -= currentGunData.gunData.damage;
         }
     }
 

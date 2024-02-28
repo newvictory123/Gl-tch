@@ -71,7 +71,7 @@ public class PlayerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (activeAbility == 0)
+            if (activeAbility != 2)
             {
                 activeAbility = 2;
                 a_2.isOn = true;

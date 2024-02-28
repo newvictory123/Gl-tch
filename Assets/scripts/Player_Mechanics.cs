@@ -12,11 +12,21 @@ public class Player_Mechanics : MonoBehaviour
     public GameObject deathScreen;
     public GameObject winScreen;
 
+     GameObject UI;
+     PlayerMovement moveScript;
+     PlayerCam cameraScript;
+     GameObject Gun;
+    
+
     private void Start()
     {
         HB = GameObject.Find("Greenbar").GetComponent<Image>();
         currentHealth = maxHealth;
         deathScreen.SetActive(false);
+        moveScript = GetComponent<PlayerMovement>();
+        cameraScript = GameObject.Find("Player Camera").GetComponent<PlayerCam>();
+        Gun = GameObject.Find("Arm holder");
+        UI = GameObject.Find("UI");
     }
 
     private void Update()
@@ -27,6 +37,11 @@ public class Player_Mechanics : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             deathScreen.SetActive(true);
+            UI.SetActive(false);
+            moveScript.enabled = false;
+            cameraScript.enabled = false;
+            Gun.SetActive(false);
+            Cursor.visible = true;
         }
     }
 
@@ -36,7 +51,12 @@ public class Player_Mechanics : MonoBehaviour
         if (collision.transform.tag == "WIN_Zone")
         {
             winScreen.SetActive(true);
-            Debug.Log("Hello");
+            UI.SetActive(false);
+            moveScript.enabled = false;
+            cameraScript.enabled = false;
+            Gun.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState=CursorLockMode.Confined;
         }
     }
 
