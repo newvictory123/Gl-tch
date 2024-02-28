@@ -5199,8 +5199,8 @@ MonoBehaviour:
   movePoints:
   - {fileID: 5249573123248291425}
   velocity: {x: 0, y: 0, z: 0}
-  bulletInterval: 3
-  bulletSpeed: 6
+  bulletInterval: 1
+  bulletSpeed: 10
   playerDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 2
   visionRange: 100
