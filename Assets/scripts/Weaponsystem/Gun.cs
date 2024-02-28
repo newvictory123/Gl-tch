@@ -58,7 +58,9 @@ public class Gun : MonoBehaviour {
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
                 OnGunShot();
+            
             }
+        
         }
     }
 
@@ -69,6 +71,7 @@ public class Gun : MonoBehaviour {
 
         AmmoUICount.text = gunData.currentAmmo.ToString();
         AmmoUIMax.text = gunData.magSize.ToString();
+                
     }
 
     private void OnGunShot() {  }
