@@ -47,7 +47,7 @@ public class Enemy_Melee : MonoBehaviour
         ps = transform.Find("Sparks").GetComponent<ParticleSystem>();
         mR = GetComponent<MeshRenderer>();
         c = GetComponent<Collider>();
-        player_Mechanics = GameObject.Find("player").GetComponent<Player_Mechanics>();
+        player_Mechanics = GameObject.Find("Player").GetComponent<Player_Mechanics>();
 
         indexOfTarget = -1;
         NextTarget();
@@ -98,11 +98,9 @@ public class Enemy_Melee : MonoBehaviour
     }
 
 
-    IEnumerator Exsplode()
+    IEnumerator Explode()
     {
         animator.SetBool("IsExploding", true);
-
-        //yield return new WaitForSeconds(1f);
 
         mR.enabled = false;
         c.enabled = false;
@@ -110,12 +108,14 @@ public class Enemy_Melee : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         ps.Play();
+
+        yield return new WaitForSeconds(0.9f);
         if (playerDistance <= deathRange + 1f)
         {
-            player_Mechanics.currentHealth -= 0.25f;
+            player_Mechanics.currentHealth -= 2.25f;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         Destroy(gameObject);
 
@@ -210,7 +210,7 @@ public class Enemy_Melee : MonoBehaviour
         animator.SetFloat("Movespeed", 1f);
         if (GetDistanceToPlayer() < deathRange)
         {
-            StartCoroutine(Exsplode());
+            StartCoroutine(Explode());
         }
 
         if (!CanSeePlayer())
